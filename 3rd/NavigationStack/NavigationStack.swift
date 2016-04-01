@@ -39,7 +39,17 @@ public class NavigationStack: UINavigationController {
   private var screens = [UIImage]()
   
   weak public var stackDelegate: UINavigationControllerDelegate? // use this instead delegate
-  
+
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    delegate = self
+  }
+    
+  public override init(rootViewController: UIViewController) {
+        super.init(rootViewController: rootViewController)
+    delegate = self
+  }
+    
   public required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     

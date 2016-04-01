@@ -1,0 +1,2 @@
+/Users/zhengshaobo/Library/Developer/Xcode/DerivedData/GitHouse-hewnyrdncwzwdjaioujijktmodkj/Build/Products/Debug-iphonesimulator/GitHouse.app
+

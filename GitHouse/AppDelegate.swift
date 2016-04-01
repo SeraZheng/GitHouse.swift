@@ -7,40 +7,74 @@
 //
 
 import UIKit
+import Octokit
+import RAMAnimatedTabBarController
+import Localize_Swift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
+    let config = OAuthConfiguration(token: "e8811b70b5098df6b6d3", secret: "029d4f638fd4e52b9b3723bee1c333f75dee40cc", scopes: ["repo", "read:org"])
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UINavigationBar.appearance().barTintColor =  UIColor(red: 0/255.0, green: 100.0/255.0, blue: 174.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.flatWhiteColor()
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false
+        )
+        
+        window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
+        
+        if GitHouseUtils.sharedInstance.accessToken != nil {
+            self.setHomeTabViewController(window!)
+        } else {
+            weak var weakSelf = self
+            window?.rootViewController = UserLoginViewController.init(authCompletion: { (user) in
+                let strongSelf = weakSelf!
+                strongSelf.setHomeTabViewController(self.window!)
+            })
+        }
+        
+        window?.makeKeyAndVisible()
         
         return true
     }
 
-    func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        config.handleOpenURL(url) { config in
+            self.loadCurrentUser(config) // purely optional of course
+        }
+        return false
     }
     
+    func loadCurrentUser(config: TokenConfiguration) {
+        Octokit(config).me() { response in
+            switch response {
+            case .Success(let user):
+                print(user.login)
+            case .Failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    //MARK: setRootViewController
+    
+    func setHomeTabViewController(window: UIWindow) -> Void {
+        
+//        let newsVC = NewsViewController(nibName: nil, bundle: nil)
+        let respositiesVC = BaseNavigationController.init(rootViewController:RepositoriesViewController(nibName: nil, bundle: nil))
+        let discoverVC = UINavigationController.init(rootViewController:DiscoverViewController(nibName: nil, bundle: nil))
+        let profileVC = UINavigationController.init(rootViewController:ProfileViewController())
+        
+        let rootVC = UITabBarController.init(nibName: nil, bundle: nil)
+        rootVC.viewControllers = [respositiesVC, discoverVC, profileVC]
+
+        window.rootViewController = rootVC
+    }
+
 }
 

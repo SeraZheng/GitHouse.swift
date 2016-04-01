@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  GitHouse
+
+  Created by 郑少博 on 16/3/29.
+  Copyright © 2016年 郑少博. All rights reserved.
+*/
+/*
+ * ./GitHouse/UserLoginViewController.swift
+ */
+
+"Please input your Access Token" = "Please input your Access Token";
+
+"Login" = "Login";
+
+
+
+
+
+
+
+/*
+ * ./GitHouse/RepositoriesViewController.swift
+ */
+
+"Respositories" = "Respositories";
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * SHARED STRINGS
+ */
+
