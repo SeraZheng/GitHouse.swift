@@ -12,6 +12,7 @@
 		FC99619E1CA3FECF0030D55B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99619D1CA3FECF0030D55B /* AppDelegate.swift */; };
 		FC9961A51CA3FECF0030D55B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC9961A41CA3FECF0030D55B /* Assets.xcassets */; };
 		FCADDD681CAB86DD00137AA3 /* BaseModeProtocoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADDD671CAB86DD00137AA3 /* BaseModeProtocoll.swift */; };
+		FCAFB2991CB3CD12006CB6C3 /* ContactsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAFB2981CB3CD12006CB6C3 /* ContactsTableCell.swift */; };
 		FCBA109C1CA4EF22002E8DA8 /* CollectionStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA10981CA4EF22002E8DA8 /* CollectionStackViewController.swift */; };
 		FCBA109D1CA4EF22002E8DA8 /* CollectionViewStackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA10991CA4EF22002E8DA8 /* CollectionViewStackCell.swift */; };
 		FCBA109E1CA4EF22002E8DA8 /* CollectionViewStackFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA109A1CA4EF22002E8DA8 /* CollectionViewStackFlowLayout.swift */; };
@@ -22,8 +23,7 @@
 		FCE17F751CA90ED900CD7E39 /* GitHouseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F741CA90ED900CD7E39 /* GitHouseUtils.swift */; };
 		FCE17F791CA9175400CD7E39 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F781CA9175400CD7E39 /* ProfileViewController.swift */; };
 		FCE17F7B1CA9248000CD7E39 /* RepositoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F7A1CA9248000CD7E39 /* RepositoriesViewController.swift */; };
-		FCE17F7D1CA924C900CD7E39 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F7C1CA924C900CD7E39 /* DiscoverViewController.swift */; };
-		FCE17F7F1CA924E700CD7E39 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F7E1CA924E700CD7E39 /* NewsViewController.swift */; };
+		FCE17F7D1CA924C900CD7E39 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F7C1CA924C900CD7E39 /* ContactViewController.swift */; };
 		FCF299F51CAA790B00B6EA0A /* CGRectEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF299F01CAA790B00B6EA0A /* CGRectEx.swift */; };
 		FCF299F61CAA790B00B6EA0A /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF299F11CAA790B00B6EA0A /* FadeTransition.swift */; };
 		FCF299F71CAA790B00B6EA0A /* NSTimerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF299F21CAA790B00B6EA0A /* NSTimerEx.swift */; };
@@ -52,6 +52,7 @@
 		FC99619D1CA3FECF0030D55B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC9961A41CA3FECF0030D55B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = GitHouse/Assets.xcassets; sourceTree = "<group>"; };
 		FCADDD671CAB86DD00137AA3 /* BaseModeProtocoll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModeProtocoll.swift; sourceTree = "<group>"; };
+		FCAFB2981CB3CD12006CB6C3 /* ContactsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableCell.swift; sourceTree = "<group>"; };
 		FCBA10981CA4EF22002E8DA8 /* CollectionStackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionStackViewController.swift; sourceTree = "<group>"; };
 		FCBA10991CA4EF22002E8DA8 /* CollectionViewStackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewStackCell.swift; sourceTree = "<group>"; };
 		FCBA109A1CA4EF22002E8DA8 /* CollectionViewStackFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewStackFlowLayout.swift; sourceTree = "<group>"; };
@@ -62,8 +63,7 @@
 		FCE17F741CA90ED900CD7E39 /* GitHouseUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHouseUtils.swift; sourceTree = "<group>"; };
 		FCE17F781CA9175400CD7E39 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FCE17F7A1CA9248000CD7E39 /* RepositoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoriesViewController.swift; sourceTree = "<group>"; };
-		FCE17F7C1CA924C900CD7E39 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
-		FCE17F7E1CA924E700CD7E39 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		FCE17F7C1CA924C900CD7E39 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		FCF299F01CAA790B00B6EA0A /* CGRectEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRectEx.swift; sourceTree = "<group>"; };
 		FCF299F11CAA790B00B6EA0A /* FadeTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
 		FCF299F21CAA790B00B6EA0A /* NSTimerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerEx.swift; sourceTree = "<group>"; };
@@ -168,16 +168,24 @@
 			name = Repositories;
 			sourceTree = "<group>";
 		};
+		FCAFB2971CB3C8BA006CB6C3 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				FCE17F7C1CA924C900CD7E39 /* ContactViewController.swift */,
+				FCAFB2981CB3CD12006CB6C3 /* ContactsTableCell.swift */,
+			);
+			name = Contact;
+			sourceTree = "<group>";
+		};
 		FCBA10941CA4EEB7002E8DA8 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				FCAFB2971CB3C8BA006CB6C3 /* Contact */,
 				FCF703491CAE572F00CE1565 /* Profile */,
 				FCADDD6B1CABA20000137AA3 /* Repositories */,
 				FCF299FC1CAA8EB600B6EA0A /* Base */,
 				FCE17F731CA90EB400CD7E39 /* Utils */,
 				FCBA10A11CA4F4AC002E8DA8 /* UserLoginViewController.swift */,
-				FCE17F7C1CA924C900CD7E39 /* DiscoverViewController.swift */,
-				FCE17F7E1CA924E700CD7E39 /* NewsViewController.swift */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -348,12 +356,12 @@
 				FCF299F91CAA790B00B6EA0A /* TransitionSubmitButton.swift in Sources */,
 				FCBA109E1CA4EF22002E8DA8 /* CollectionViewStackFlowLayout.swift in Sources */,
 				FCE17F751CA90ED900CD7E39 /* GitHouseUtils.swift in Sources */,
-				FCE17F7F1CA924E700CD7E39 /* NewsViewController.swift in Sources */,
 				FCD983511CAD288300969491 /* BaseNavigationController.swift in Sources */,
 				FCF703501CAE63F500CE1565 /* String+Octicons.swift in Sources */,
 				FCE17F7B1CA9248000CD7E39 /* RepositoriesViewController.swift in Sources */,
 				FCF703511CAE63F500CE1565 /* UIFont+Octicons.swift in Sources */,
 				FCF299FB1CAA8DBE00B6EA0A /* BaseViewController.swift in Sources */,
+				FCAFB2991CB3CD12006CB6C3 /* ContactsTableCell.swift in Sources */,
 				FCBA10A21CA4F4AC002E8DA8 /* UserLoginViewController.swift in Sources */,
 				FCBA109F1CA4EF22002E8DA8 /* NavigationStack.swift in Sources */,
 				FCE17F791CA9175400CD7E39 /* ProfileViewController.swift in Sources */,
@@ -364,7 +372,7 @@
 				FCF299F71CAA790B00B6EA0A /* NSTimerEx.swift in Sources */,
 				FCF299F61CAA790B00B6EA0A /* FadeTransition.swift in Sources */,
 				FCF299F81CAA790B00B6EA0A /* SpinerLayer.swift in Sources */,
-				FCE17F7D1CA924C900CD7E39 /* DiscoverViewController.swift in Sources */,
+				FCE17F7D1CA924C900CD7E39 /* ContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

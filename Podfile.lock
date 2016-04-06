@@ -13,7 +13,6 @@ PODS:
   - Localize-Swift (1.1)
   - NBNRequestKit (0.2.2)
   - NVActivityIndicatorView (2.3)
-  - OcticonsIOS (0.0.2)
   - OctoKit.swift (0.5.2):
     - NBNRequestKit (~> 0.2.2)
   - SnapKit (0.19.1)
@@ -30,7 +29,6 @@ DEPENDENCIES:
   - KeychainAccess
   - Localize-Swift
   - NVActivityIndicatorView
-  - OcticonsIOS
   - OctoKit.swift
   - SnapKit
   - TextFieldEffects
@@ -47,7 +45,6 @@ SPEC CHECKSUMS:
   Localize-Swift: 72fab22c9c271a1041082fa3b53ca64e527ccf4a
   NBNRequestKit: d00bad4cb6ac80daa9479e5f35e98a263bae6166
   NVActivityIndicatorView: c7ef25ef527ab5e51b00322cb1ddd58681bcf2a3
-  OcticonsIOS: 845ce2794c2837cf688049c4782467ef0c3c949d
   OctoKit.swift: dcd06e18fd5374055cbfb673d2e1a9c1c1505dfc
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   TextFieldEffects: a1a78efeb93b65c611ad287b28a068c9a4a5f5b4

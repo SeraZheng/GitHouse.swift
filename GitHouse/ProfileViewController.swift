@@ -8,7 +8,6 @@
 
 import UIKit
 import Octokit
-import RAMAnimatedTabBarController
 
 class ProfileViewController: UIViewController {
 
@@ -27,38 +26,65 @@ class ProfileViewController: UIViewController {
         super.loadView()
         title = "Profile".localized()
         view.backgroundColor = UIColor.flatWhiteColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.flatWhiteColor()]
+        
+        let iconView = UIView()
+        iconView.backgroundColor = UIColor.flatWhiteColor()
+        view.addSubview(iconView)
+        
+        iconView.snp_makeConstraints { (make) in
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+            make.top.equalTo(64)
+            make.height.equalTo(140)
+        }
+        
+        let headerView = UIImageView()
+        headerView.layer.cornerRadius = 35
+        headerView.layer.masksToBounds = true
+        headerView.af_setImageWithURL(NSURL.init(string:(GitHouseUtils.myProfile?.avatarURL)!)!, placeholderImage: UIImage(named: "PlaceHolder"), filter: nil, imageTransition: UIImageView.ImageTransition.FlipFromTop(0.5), runImageTransitionIfCached: true, completion: nil)
+        iconView.addSubview(headerView)
+        
+        headerView.snp_makeConstraints { (make) in
+            make.width.equalTo(70)
+            make.height.equalTo(70)
+            make.top.equalTo(15)
+            make.centerX.equalTo(iconView)
+        }
+        
+        let nameLabel = UILabel()
+        nameLabel.lineBreakMode = NSLineBreakMode.ByTruncatingMiddle
+        nameLabel.font = UIFont.boldSystemFontOfSize(20)
+        nameLabel.textAlignment = NSTextAlignment.Center
+        nameLabel.text = GitHouseUtils.myProfile?.name
+        iconView.addSubview(nameLabel)
+        
+        nameLabel.snp_makeConstraints { (make) in
+            make.top.equalTo(headerView.snp_bottom)
+            make.width.equalTo(100)
+            make.centerX.equalTo(iconView)
+            make.height.equalTo(30)
+        }
         
         
         tableView.tableFooterView = UIView.init()
         tableView.backgroundColor = UIColor.flatWhiteColor()
+        tableView.scrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
-        
         view.addSubview(tableView)
-        
+
         tableView.snp_makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
-        }
-        
-        let headerView = UIImageView()
-        headerView.af_setImageWithURL(NSURL.init(string:(GitHouseUtils.myProfile?.avatarURL)!)!, placeholderImage: UIImage(named: "PlaceHolder"), filter: nil, imageTransition: UIImageView.ImageTransition.FlipFromTop(0.5), runImageTransitionIfCached: true, completion: nil)
-        tableView.tableHeaderView = headerView
-        
-        headerView.snp_makeConstraints { (make) in
-            make.left.equalTo(tableView)
-            make.right.equalTo(tableView)
-            make.top.equalTo(tableView)
-            make.height.equalTo(60)
+            make.left.equalTo(view)
+            make.right.equalTo(view)
+            make.top.equalTo(iconView.snp_bottom)
+            make.bottom.equalTo(view.snp_bottom).offset(-44)
         }
     }
     
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
-    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
@@ -74,7 +100,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
+        configCell(cell, forRowAtIndexPath: indexPath)
+        cell.userInteractionEnabled = false
     }
     
     private func configCell(cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

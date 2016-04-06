@@ -39,7 +39,7 @@ class RepositoriesViewController: BaseViewController {
         let segmentedControl = UISegmentedControl.init(items: ["Owned".localized(), "Stared".localized()])
         segmentedControl.tintColor = UIColor.flatWhiteColor()
         segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.layer.cornerRadius = 5
+        segmentedControl.layer.cornerRadius = 10
         segmentedControl.addTarget(self, action: #selector(segmentedAction), forControlEvents: UIControlEvents.ValueChanged)
         navigationItem.titleView = segmentedControl
         loadingView.startAnimation()

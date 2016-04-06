@@ -20,6 +20,5 @@ pod 'Localize-Swift'
 pod 'KeychainAccess'
 pod 'Dwifft'
 pod 'DGElasticPullToRefresh'
-pod 'OcticonsSwift'
 
 

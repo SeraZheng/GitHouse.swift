@@ -44,7 +44,7 @@ public class GitHouseUtils: NSObject {
             } catch {
                 _accessToken = nil
             }
-            return _accessToken!
+            return _accessToken
         }
         set {
             _accessToken = newValue

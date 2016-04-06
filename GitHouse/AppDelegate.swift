@@ -8,7 +8,6 @@
 
 import UIKit
 import Octokit
-import RAMAnimatedTabBarController
 import Localize_Swift
 
 @UIApplicationMain
@@ -67,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let newsVC = NewsViewController(nibName: nil, bundle: nil)
         let respositiesVC = BaseNavigationController.init(rootViewController:RepositoriesViewController(nibName: nil, bundle: nil))
-        let discoverVC = UINavigationController.init(rootViewController:DiscoverViewController(nibName: nil, bundle: nil))
+        let discoverVC = UINavigationController.init(rootViewController:ContactViewController(nibName: nil, bundle: nil))
         let profileVC = UINavigationController.init(rootViewController:ProfileViewController())
         
         let rootVC = UITabBarController.init(nibName: nil, bundle: nil)
