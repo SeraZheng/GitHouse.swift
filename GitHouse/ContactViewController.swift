@@ -57,44 +57,43 @@ class ContactViewController: BaseViewController {
 //MARK: Data
 extension ContactViewController {
     override func loadData() {
-        weak var weakSelf = self
 
         switch contactType {
         case ContactType.followings:
-            Octokit(GitHouseUtils.sharedInstance.config).myFollowing({ (response) in
-                let strongSelf = weakSelf
+            GitHouseUtils.octokit!.myFollowing({ [weak self](response) in
+                guard let strongSelf = self else { return }
                 
                 switch response {
                 case .Success( let contacts):
-                    strongSelf!.allItems = contacts
+                    strongSelf.allItems = contacts
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf?.loadingView.stopAnimation()
-                        strongSelf?.tableView.reloadData()
+                        strongSelf.loadingView.stopAnimation()
+                        strongSelf.tableView.reloadData()
                     })
                     
                 case .Failure( _):
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf?.modelDelegate?.showError!()
+                        strongSelf.modelDelegate?.showError!()
                     })
                 }
             })
         default:
-            Octokit(GitHouseUtils.sharedInstance.config).myFollowers { (response) in
+            GitHouseUtils.octokit!.myFollowers { [weak self](response) in
                 
-                let strongSelf = weakSelf
+                guard let strongSelf = self else { return }
                 
                 switch response {
                 case .Success( let contacts):
-                    strongSelf!.allItems = contacts
+                    strongSelf.allItems = contacts
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf?.loadingView.stopAnimation()
-                        strongSelf?.tableView.reloadData()
+                        strongSelf.loadingView.stopAnimation()
+                        strongSelf.tableView.reloadData()
                     })
                     
                 case .Failure( _):
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf?.loadingView.stopAnimation()
-                        strongSelf?.modelDelegate?.showError!()
+                        strongSelf.loadingView.stopAnimation()
+                        strongSelf.modelDelegate?.showError!()
                     })
                 }
             }
@@ -112,7 +111,7 @@ extension ContactViewController {
         return allItems.count
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let user: User = allItems[indexPath.row] as! User
         (cell as! ContactsTableCell).configCell(user)
     }

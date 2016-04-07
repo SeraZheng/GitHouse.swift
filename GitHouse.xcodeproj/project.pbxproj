@@ -39,6 +39,8 @@
 		FCF703501CAE63F500CE1565 /* String+Octicons.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7034D1CAE63F500CE1565 /* String+Octicons.swift */; };
 		FCF703511CAE63F500CE1565 /* UIFont+Octicons.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7034E1CAE63F500CE1565 /* UIFont+Octicons.swift */; };
 		FCF703521CAE63F500CE1565 /* UIImage+Octicons.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7034F1CAE63F500CE1565 /* UIImage+Octicons.swift */; };
+		FCFE8BC91CB6471D0051D3D9 /* UIScrollView+GitHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8BC81CB6471D0051D3D9 /* UIScrollView+GitHouse.swift */; };
+		FCFE8BCB1CB64D5B0051D3D9 /* GitHouseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE8BCA1CB64D5B0051D3D9 /* GitHouseStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +81,8 @@
 		FCF7034D1CAE63F500CE1565 /* String+Octicons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Octicons.swift"; sourceTree = "<group>"; };
 		FCF7034E1CAE63F500CE1565 /* UIFont+Octicons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Octicons.swift"; sourceTree = "<group>"; };
 		FCF7034F1CAE63F500CE1565 /* UIImage+Octicons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Octicons.swift"; sourceTree = "<group>"; };
+		FCFE8BC81CB6471D0051D3D9 /* UIScrollView+GitHouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+GitHouse.swift"; sourceTree = "<group>"; };
+		FCFE8BCA1CB64D5B0051D3D9 /* GitHouseStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHouseStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +157,6 @@
 			children = (
 				FCBA10961CA4EF22002E8DA8 /* 3rd */,
 				FCBA10941CA4EEB7002E8DA8 /* Class */,
-				FCD983501CAD288300969491 /* BaseNavigationController.swift */,
 				FC99619D1CA3FECF0030D55B /* AppDelegate.swift */,
 			);
 			path = GitHouse;
@@ -180,12 +183,13 @@
 		FCBA10941CA4EEB7002E8DA8 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				FCFE8BCC1CB64EB10051D3D9 /* Login */,
+				FCFE8BC71CB646FD0051D3D9 /* Extensions */,
 				FCAFB2971CB3C8BA006CB6C3 /* Contact */,
 				FCF703491CAE572F00CE1565 /* Profile */,
 				FCADDD6B1CABA20000137AA3 /* Repositories */,
 				FCF299FC1CAA8EB600B6EA0A /* Base */,
 				FCE17F731CA90EB400CD7E39 /* Utils */,
-				FCBA10A11CA4F4AC002E8DA8 /* UserLoginViewController.swift */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -215,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				FCE17F741CA90ED900CD7E39 /* GitHouseUtils.swift */,
+				FCFE8BCA1CB64D5B0051D3D9 /* GitHouseStyle.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 			children = (
 				FCF299FA1CAA8DBE00B6EA0A /* BaseViewController.swift */,
 				FCADDD671CAB86DD00137AA3 /* BaseModeProtocoll.swift */,
+				FCD983501CAD288300969491 /* BaseNavigationController.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -256,6 +262,22 @@
 				FCF7034F1CAE63F500CE1565 /* UIImage+Octicons.swift */,
 			);
 			path = Octicons;
+			sourceTree = "<group>";
+		};
+		FCFE8BC71CB646FD0051D3D9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FCFE8BC81CB6471D0051D3D9 /* UIScrollView+GitHouse.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		FCFE8BCC1CB64EB10051D3D9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FCBA10A11CA4F4AC002E8DA8 /* UserLoginViewController.swift */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC99619E1CA3FECF0030D55B /* AppDelegate.swift in Sources */,
+				FCFE8BC91CB6471D0051D3D9 /* UIScrollView+GitHouse.swift in Sources */,
 				FCBA109D1CA4EF22002E8DA8 /* CollectionViewStackCell.swift in Sources */,
 				FCD983531CAD296500969491 /* RepositoriesTableCellTableViewCell.swift in Sources */,
 				FCF299F91CAA790B00B6EA0A /* TransitionSubmitButton.swift in Sources */,
@@ -371,6 +394,7 @@
 				FCADDD681CAB86DD00137AA3 /* BaseModeProtocoll.swift in Sources */,
 				FCF299F71CAA790B00B6EA0A /* NSTimerEx.swift in Sources */,
 				FCF299F61CAA790B00B6EA0A /* FadeTransition.swift in Sources */,
+				FCFE8BCB1CB64D5B0051D3D9 /* GitHouseStyle.swift in Sources */,
 				FCF299F81CAA790B00B6EA0A /* SpinerLayer.swift in Sources */,
 				FCE17F7D1CA924C900CD7E39 /* ContactViewController.swift in Sources */,
 			);

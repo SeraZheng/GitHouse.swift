@@ -33,8 +33,8 @@ class RepositoriesViewController: BaseViewController {
         super.loadView()
         title = "Respositories".localized()
 
+        tableView.estimatedRowHeight = 70
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
         
         let segmentedControl = UISegmentedControl.init(items: ["Owned".localized(), "Stared".localized()])
         segmentedControl.tintColor = UIColor.flatWhiteColor()
@@ -64,7 +64,7 @@ extension RepositoriesViewController {
     
     override func loadData() {
         
-        if !GitHouseUtils.sharedInstance.authenticated {
+        if !GitHouseUtils.authenticated {
             authenticate()
         } else {
             fetchResponsitories()
@@ -72,28 +72,27 @@ extension RepositoriesViewController {
     }
     
     private func authenticate() -> Void {
-        weak var weakSelf = self
-        Octokit(GitHouseUtils.sharedInstance.config).me { (response) in
-            let strongSelf = weakSelf
+        GitHouseUtils.octokit!.me { [weak self](response) in
+            guard let strongSelf = self else { return }
             
             switch response {
             case .Success(let user):
                 GitHouseUtils.myProfile = user
                 
-                strongSelf?.fetchResponsitories()
+                strongSelf.fetchResponsitories()
                 dispatch_async(dispatch_get_main_queue(), { 
-                    strongSelf?.dismissViewControllerAnimated(true, completion: {})
+                    strongSelf.dismissViewControllerAnimated(true, completion: {})
                 })
                 
             case .Failure( _):
                 
                 dispatch_async(dispatch_get_main_queue(), { 
-                    strongSelf!.presentViewController(UserLoginViewController(authCompletion:{ (user) in
-                        strongSelf?.loadingView.stopAnimation()
-                        strongSelf?.fetchResponsitories()
+                    strongSelf.presentViewController(UserLoginViewController(authCompletion:{ (user) in
+                        strongSelf.loadingView.stopAnimation()
+                        strongSelf.fetchResponsitories()
                         
-                        strongSelf?.dismissViewControllerAnimated(true, completion: {
-                            strongSelf?.loadingView.startAnimation()
+                        strongSelf.dismissViewControllerAnimated(true, completion: {
+                            strongSelf.loadingView.startAnimation()
                         })
                     }), animated: true, completion: {})
                 })
@@ -102,45 +101,44 @@ extension RepositoriesViewController {
     }
     
     private func fetchResponsitories() -> Void {
-        weak var weakSelf = self
         
         switch repositoriesType {
         case RepositoriesType.stared:
-            Octokit(GitHouseUtils.sharedInstance.config).myStars({ (response) in
-                let strongSelf = weakSelf
+            GitHouseUtils.octokit!.myStars({ [weak self](response) in
+                guard let strongSelf = self else { return }
                 
                 switch response {
                 case .Success( let repositories):
-                    strongSelf!.allItems = repositories
+                    strongSelf.allItems = repositories
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf?.loadingView.stopAnimation()
-                        strongSelf?.tableView.reloadData()
+                        strongSelf.loadingView.stopAnimation()
+                        strongSelf.tableView.reloadData()
                     })
                     
                 case .Failure( _):
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf?.modelDelegate?.showError!()
+                        strongSelf.modelDelegate?.showError!()
                     })
                 }
 
             })
         default:
-            Octokit(GitHouseUtils.sharedInstance.config).repositories() { response in
+            GitHouseUtils.octokit!.repositories() { [weak self] (response) in
                 
-                let strongSelf = weakSelf
+                guard let strongSelf = self else { return }
                 
                 switch response {
                 case .Success( let repositories):
-                    strongSelf!.allItems = repositories
+                    strongSelf.allItems = repositories
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf?.loadingView.stopAnimation()
-                        strongSelf?.tableView.reloadData()
+                        strongSelf.loadingView.stopAnimation()
+                        strongSelf.tableView.reloadData()
                     })
                     
                 case .Failure( _):
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf?.loadingView.stopAnimation()
-                        strongSelf?.modelDelegate?.showError!()
+                        strongSelf.loadingView.stopAnimation()
+                        strongSelf.modelDelegate?.showError!()
                     })
                 }
             }
@@ -159,7 +157,7 @@ extension RepositoriesViewController {
         return allItems.count
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let repository: Repository = allItems[indexPath.row] as! Repository
         (cell as! RepositoriesTableCellTableViewCell).configCell(repository)
     }

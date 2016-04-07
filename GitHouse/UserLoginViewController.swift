@@ -123,18 +123,18 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
         
         let config = TokenConfiguration(usernameField.text)
         
-        weak var weakSelf = self
-        Octokit(config).me() { response in
+        Octokit(config).me() {[weak self] response in
             dispatch_async(dispatch_get_main_queue(), {
                 
-                let strongSelf = weakSelf!
+                guard let strongSelf = self else { return }
+                
                 switch response {
                 case .Success(let user):
-                    GitHouseUtils.sharedInstance.accessToken = strongSelf.usernameField.text
+                    GitHouseUtils.accessToken = strongSelf.usernameField.text
                     GitHouseUtils.myProfile = user
                     
                     strongSelf.loginButton.startFinishAnimation(0.5, completion: {
-                        GitHouseUtils.sharedInstance.authenticated = true
+                        GitHouseUtils.authenticated = true
                         strongSelf.authCompletion!(user: user)
                     })
 

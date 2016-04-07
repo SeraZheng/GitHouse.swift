@@ -56,6 +56,7 @@ public class BaseViewController: UIViewController {
                 self?.loadData()
                 self?.tableView.dg_stopLoading()
                 }, loadingView: refreshLoadingView)
+            
             tableView.dg_setPullToRefreshFillColor(UIColor(red: 57/255.0, green: 67/255.0, blue: 89/255.0, alpha: 1.0))
             tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
         }
@@ -112,4 +113,7 @@ extension BaseViewController: UITableViewDataSource {
 //MARK: UITableViewDelegate
 extension BaseViewController: UITableViewDelegate {
     
+    public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
 }
