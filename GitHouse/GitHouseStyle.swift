@@ -17,5 +17,9 @@ public struct GitHouseStyle {
         UINavigationBar.appearance().tintColor = UIColor.flatWhiteColor()
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false
         )
+        
+        KRProgressHUD.setDefaultStyle(style: KRProgressHUDStyle.Black)
+        KRProgressHUD.setDefaultMaskType(type: KRProgressHUDMaskType.Black)
+        KRProgressHUD.setDefaultActivityIndicatorStyle(style: KRProgressHUDActivityIndicatorStyle.White)
     }
 }

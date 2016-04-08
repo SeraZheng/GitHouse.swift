@@ -8,6 +8,7 @@
 
 import UIKit
 import Octokit
+import Localize_Swift
 
 public class RepositoriesTableCellTableViewCell: UITableViewCell {
 
@@ -45,8 +46,8 @@ public class RepositoriesTableCellTableViewCell: UITableViewCell {
         
         titleLabel?.text = ""
         descriptionLabel?.text = ""
-        imageView?.af_cancelImageRequest()
-        imageView?.image = nil
+        iconView?.image = UIImage(named: "PlaceHolder")
+        iconView?.af_cancelImageRequest()
         
         super.prepareForReuse()
     }
@@ -80,7 +81,10 @@ public class RepositoriesTableCellTableViewCell: UITableViewCell {
     public func configCell(repositories: Repository) -> Void {
         iconView!.af_setImageWithURL(NSURL.init(string: repositories.owner.avatarURL!)!)
         titleLabel!.text = repositories.name
-        descriptionLabel!.text = repositories.repositoryDescription
+        
+        if let description = repositories.repositoryDescription {
+            descriptionLabel!.text = description
+        }
         
         setNeedsUpdateConstraints()
         updateConstraintsIfNeeded()

@@ -39,6 +39,7 @@ public class ContactsTableCell: UITableViewCell {
     override public func prepareForReuse() {
         
         titleLabel?.text = ""
+        iconView?.image = UIImage(named: "PlaceHolder")
         iconView?.af_cancelImageRequest()
         
         super.prepareForReuse()

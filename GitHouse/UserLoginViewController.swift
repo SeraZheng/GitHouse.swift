@@ -16,9 +16,10 @@ import KeychainAccess
 
 class UserLoginViewController: UIViewController, UITextFieldDelegate {
 
-    private let logoView = UIImageView.init(image: UIImage.init(named: "Logo"))
+    private let logoView = UIImageView(image: UIImage(named: "Logo"))
     private let usernameField = YoshikoTextField()
-    private let loginButton = TKTransitionSubmitButton.init(frame: CGRectZero)
+    private let loginButton = UIButton(frame: CGRectZero)
+    private let authenticateButton = UIButton(frame: CGRectZero)
     private var authCompletion:((user: User) ->Void)?
     
     init(authCompletion:(user: User) -> Void) {
@@ -62,8 +63,7 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
         }
         
         loginButton.enabled = false
-        loginButton.normalBackgroundColor = UIColor.flatGrayColor()
-        loginButton.highlightedBackgroundColor = UIColor.flatOrangeColor()
+        loginButton.backgroundColor = UIColor.flatGrayColor()
         loginButton.layer.cornerRadius = 5
         loginButton.setTitle("Login".localized(), forState: UIControlState.Normal)
         loginButton.addTarget(self, action: #selector(loginAction), forControlEvents: UIControlEvents.TouchUpInside)
@@ -74,6 +74,22 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
             make.left.equalTo(usernameField)
             make.right.equalTo(usernameField)
             make.height.equalTo(40)
+        }
+        
+        authenticateButton.backgroundColor = view.backgroundColor
+        authenticateButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        authenticateButton.titleLabel?.font = UIFont.systemFontOfSize(14)
+        authenticateButton.setTitle("Authenticated by Web Application".localized(), forState: UIControlState.Normal)
+        authenticateButton.setTitleColor(UIColor.flatBlueColor(), forState: UIControlState.Normal)
+        authenticateButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Highlighted)
+        authenticateButton.addTarget(self, action: #selector(authenticateAction), forControlEvents: UIControlEvents.TouchUpInside)
+        view.addSubview(authenticateButton)
+        
+        authenticateButton.snp_makeConstraints { (make) in
+            make.width.equalTo(loginButton)
+            make.height.equalTo(loginButton)
+            make.bottom.equalTo(view).offset(-20)
+            make.centerX.equalTo(view)
         }
     }
     
@@ -119,9 +135,9 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
     
     func loginAction() -> Void {
         
-        loginButton.startLoadingAnimation()
-        
         let config = TokenConfiguration(usernameField.text)
+        
+        KRProgressHUD.show(progressHUDStyle: KRProgressHUDStyle.Black, maskType: KRProgressHUDMaskType.Clear, activityIndicatorStyle: KRProgressHUDActivityIndicatorStyle.White, font: nil, message: "Authenticating...".localized(), image: nil)
         
         Octokit(config).me() {[weak self] response in
             dispatch_async(dispatch_get_main_queue(), {
@@ -132,18 +148,23 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
                 case .Success(let user):
                     GitHouseUtils.accessToken = strongSelf.usernameField.text
                     GitHouseUtils.myProfile = user
+                    GitHouseUtils.authenticated = true
                     
-                    strongSelf.loginButton.startFinishAnimation(0.5, completion: {
-                        GitHouseUtils.authenticated = true
-                        strongSelf.authCompletion!(user: user)
-                    })
-
-                case .Failure( _):
-                    strongSelf.loginButton.spiner.stopAnimation()
-                    strongSelf.loginButton.returnToOriginalState()
+                    KRProgressHUD.dismiss()
+                    strongSelf.authCompletion!(user: user)
+                    
+                    
+                default:
+                    KRProgressHUD.dismiss()
                 }
             })
         }
+    }
+    
+    //MARK:AuthenticateAction
+    
+    func authenticateAction() -> Void {
+        UIApplication.sharedApplication().openURL(GitHouseUtils.oAuthConfig.authenticate()!)
     }
     
     //MARK:UITextFieldDelegate
@@ -151,11 +172,11 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
         if string.characters.count == 0 && range.location == 0 {
-            loginButton.normalBackgroundColor = UIColor.flatGrayColor()
+            loginButton.backgroundColor = UIColor.flatGrayColor()
             loginButton.enabled = false
         }
         else {
-            loginButton.normalBackgroundColor = UIColor.flatOrangeColor()
+            loginButton.backgroundColor = UIColor.flatOrangeColor()
             loginButton.enabled = true
         }
         
@@ -165,7 +186,7 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldClear(textField: UITextField) -> Bool {
         dispatch_async(dispatch_get_main_queue()) {
             self.loginButton.enabled = false
-            self.loginButton.normalBackgroundColor = UIColor.flatGrayColor()
+            self.loginButton.backgroundColor = UIColor.flatGrayColor()
         }
         return true
     }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import NVActivityIndicatorView
 import DGElasticPullToRefresh
 
 public class BaseViewController: UIViewController {
@@ -16,7 +15,6 @@ public class BaseViewController: UIViewController {
     public var allItems: Array<AnyObject> = []
     public let tableView = UITableView()
     weak var modelDelegate: BaseModelProtocol?
-    lazy var loadingView: NVActivityIndicatorView = NVActivityIndicatorView(frame: CGRectZero,type: NVActivityIndicatorType.BallClipRotate, color: UIColor.flatOrangeColor(), size: CGSizeMake(60, 60))
     
     override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -40,12 +38,6 @@ public class BaseViewController: UIViewController {
         
         tableView.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
-        }
-        
-        view.addSubview(loadingView)
-        loadingView.snp_makeConstraints { (make) in
-            make.centerX.equalTo(view)
-            make.centerY.equalTo(view)
         }
         
         if refreshEnabled {

@@ -28,6 +28,32 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = UIColor.flatWhiteColor()
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.flatWhiteColor()]
         
+        if GitHouseUtils.myProfile != nil {
+            configView()
+        } else {
+            KRProgressHUD.show()
+            
+            GitHouseUtils.octokit!.me() {[weak self] response in
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    guard let strongSelf = self else { return }
+                    
+                    switch response {
+                    case .Success(let user):
+                        GitHouseUtils.myProfile = user
+                        GitHouseUtils.authenticated = true
+                        
+                        KRProgressHUD.dismiss()
+                        strongSelf.configView()
+                    default:
+                        KRProgressHUD.showError()
+                    }
+                })
+            }
+        }
+    }
+    
+    private func configView() {
         let iconView = UIView()
         iconView.backgroundColor = UIColor.flatWhiteColor()
         view.addSubview(iconView)
@@ -73,7 +99,7 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-
+        
         tableView.snp_makeConstraints { (make) in
             make.left.equalTo(view)
             make.right.equalTo(view)

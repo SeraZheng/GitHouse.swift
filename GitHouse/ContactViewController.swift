@@ -38,7 +38,8 @@ class ContactViewController: BaseViewController {
         segmentedControl.layer.cornerRadius = 10
         segmentedControl.addTarget(self, action: #selector(segmentedAction), forControlEvents: UIControlEvents.ValueChanged)
         navigationItem.titleView = segmentedControl
-        loadingView.startAnimation()
+        
+        KRProgressHUD.show()
     }
     
     @objc private func segmentedAction(segmentedControl: UISegmentedControl) -> Void {
@@ -49,7 +50,7 @@ class ContactViewController: BaseViewController {
             contactType = ContactType.followers
         }
         
-        loadingView.startAnimation()
+        KRProgressHUD.show()
         loadData()
     }
 }
@@ -67,7 +68,7 @@ extension ContactViewController {
                 case .Success( let contacts):
                     strongSelf.allItems = contacts
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf.loadingView.stopAnimation()
+                        KRProgressHUD.dismiss()
                         strongSelf.tableView.reloadData()
                     })
                     
@@ -86,13 +87,13 @@ extension ContactViewController {
                 case .Success( let contacts):
                     strongSelf.allItems = contacts
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf.loadingView.stopAnimation()
+                        KRProgressHUD.dismiss()
                         strongSelf.tableView.reloadData()
                     })
                     
                 case .Failure( _):
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf.loadingView.stopAnimation()
+                        KRProgressHUD.dismiss()
                         strongSelf.modelDelegate?.showError!()
                     })
                 }

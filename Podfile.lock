@@ -2,33 +2,24 @@ PODS:
   - Alamofire (3.2.1)
   - AlamofireImage (2.3.1):
     - Alamofire (~> 3.2)
-  - BusyNavigationBar (1.1.0)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - DGElasticPullToRefresh (1.0.3)
-  - Dwifft (0.3.1)
-  - DynamicButton (1.6.0)
   - KeychainAccess (2.3.3)
   - Localize-Swift (1.1)
   - NBNRequestKit (0.2.2)
-  - NVActivityIndicatorView (2.3)
   - OctoKit.swift (0.5.2):
     - NBNRequestKit (~> 0.2.2)
   - SnapKit (0.19.1)
   - TextFieldEffects (1.1.1)
 
 DEPENDENCIES:
-  - Alamofire
   - AlamofireImage
-  - BusyNavigationBar
   - ChameleonFramework/Swift
   - DGElasticPullToRefresh
-  - Dwifft
-  - DynamicButton
   - KeychainAccess
   - Localize-Swift
-  - NVActivityIndicatorView
   - OctoKit.swift
   - SnapKit
   - TextFieldEffects
@@ -36,15 +27,11 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
   AlamofireImage: e52336282757bbe1644f075d6cb85f19c891f939
-  BusyNavigationBar: cde4cbb450b58448204d5ab87f2dce07b4f0d7e1
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DGElasticPullToRefresh: 040f39ae69840b3261d163fe6735c5901bf851e9
-  Dwifft: b7eaeaaf4ac14a2e77b0c661cd1b5524c58fa891
-  DynamicButton: c76f2247a6f7e8ce35b0ed3bcf34396b89ac069c
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
   Localize-Swift: 72fab22c9c271a1041082fa3b53ca64e527ccf4a
   NBNRequestKit: d00bad4cb6ac80daa9479e5f35e98a263bae6166
-  NVActivityIndicatorView: c7ef25ef527ab5e51b00322cb1ddd58681bcf2a3
   OctoKit.swift: dcd06e18fd5374055cbfb673d2e1a9c1c1505dfc
   SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
   TextFieldEffects: a1a78efeb93b65c611ad287b28a068c9a4a5f5b4

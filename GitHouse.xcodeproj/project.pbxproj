@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		02B258E2619097D910D09C57 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4952F214C7C4B8EA08D91257 /* Pods.framework */; };
 		FC2788091CAA981500477EB9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC27880B1CAA981500477EB9 /* Localizable.strings */; };
+		FC3CB4291CB78CC900CA7D60 /* KRActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CB4251CB78CC900CA7D60 /* KRActivityIndicatorView.swift */; };
+		FC3CB42A1CB78CC900CA7D60 /* KRActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CB4261CB78CC900CA7D60 /* KRActivityIndicatorViewStyle.swift */; };
+		FC3CB42B1CB78CC900CA7D60 /* KRProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CB4271CB78CC900CA7D60 /* KRProgressHUD.swift */; };
+		FC3CB42C1CB78CC900CA7D60 /* KRProgressHUDIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CB4281CB78CC900CA7D60 /* KRProgressHUDIconType.swift */; };
 		FC99619E1CA3FECF0030D55B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99619D1CA3FECF0030D55B /* AppDelegate.swift */; };
 		FC9961A51CA3FECF0030D55B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC9961A41CA3FECF0030D55B /* Assets.xcassets */; };
 		FCADDD681CAB86DD00137AA3 /* BaseModeProtocoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADDD671CAB86DD00137AA3 /* BaseModeProtocoll.swift */; };
@@ -24,11 +28,6 @@
 		FCE17F791CA9175400CD7E39 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F781CA9175400CD7E39 /* ProfileViewController.swift */; };
 		FCE17F7B1CA9248000CD7E39 /* RepositoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F7A1CA9248000CD7E39 /* RepositoriesViewController.swift */; };
 		FCE17F7D1CA924C900CD7E39 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F7C1CA924C900CD7E39 /* ContactViewController.swift */; };
-		FCF299F51CAA790B00B6EA0A /* CGRectEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF299F01CAA790B00B6EA0A /* CGRectEx.swift */; };
-		FCF299F61CAA790B00B6EA0A /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF299F11CAA790B00B6EA0A /* FadeTransition.swift */; };
-		FCF299F71CAA790B00B6EA0A /* NSTimerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF299F21CAA790B00B6EA0A /* NSTimerEx.swift */; };
-		FCF299F81CAA790B00B6EA0A /* SpinerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF299F31CAA790B00B6EA0A /* SpinerLayer.swift */; };
-		FCF299F91CAA790B00B6EA0A /* TransitionSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF299F41CAA790B00B6EA0A /* TransitionSubmitButton.swift */; };
 		FCF299FB1CAA8DBE00B6EA0A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF299FA1CAA8DBE00B6EA0A /* BaseViewController.swift */; };
 		FCF29A021CAA8F5F00B6EA0A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF29A011CAA8F5F00B6EA0A /* UIKit.framework */; };
 		FCF29A041CAA8F6800B6EA0A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF29A031CAA8F6800B6EA0A /* Foundation.framework */; };
@@ -50,6 +49,10 @@
 		FC27880A1CAA981500477EB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FC27880C1CAA981800477EB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FC27880D1CAA981900477EB9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FC3CB4251CB78CC900CA7D60 /* KRActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRActivityIndicatorView.swift; sourceTree = "<group>"; };
+		FC3CB4261CB78CC900CA7D60 /* KRActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
+		FC3CB4271CB78CC900CA7D60 /* KRProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRProgressHUD.swift; sourceTree = "<group>"; };
+		FC3CB4281CB78CC900CA7D60 /* KRProgressHUDIconType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRProgressHUDIconType.swift; sourceTree = "<group>"; };
 		FC99619A1CA3FECF0030D55B /* GitHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC99619D1CA3FECF0030D55B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC9961A41CA3FECF0030D55B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = GitHouse/Assets.xcassets; sourceTree = "<group>"; };
@@ -66,11 +69,6 @@
 		FCE17F781CA9175400CD7E39 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FCE17F7A1CA9248000CD7E39 /* RepositoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoriesViewController.swift; sourceTree = "<group>"; };
 		FCE17F7C1CA924C900CD7E39 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
-		FCF299F01CAA790B00B6EA0A /* CGRectEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRectEx.swift; sourceTree = "<group>"; };
-		FCF299F11CAA790B00B6EA0A /* FadeTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
-		FCF299F21CAA790B00B6EA0A /* NSTimerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerEx.swift; sourceTree = "<group>"; };
-		FCF299F31CAA790B00B6EA0A /* SpinerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinerLayer.swift; sourceTree = "<group>"; };
-		FCF299F41CAA790B00B6EA0A /* TransitionSubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSubmitButton.swift; sourceTree = "<group>"; };
 		FCF299FA1CAA8DBE00B6EA0A /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FCF29A011CAA8F5F00B6EA0A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FCF29A031CAA8F6800B6EA0A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -131,6 +129,25 @@
 				FC27880B1CAA981500477EB9 /* Localizable.strings */,
 			);
 			name = Resource;
+			sourceTree = "<group>";
+		};
+		FC3CB4231CB78CC900CA7D60 /* KRProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				FC3CB4241CB78CC900CA7D60 /* KRActivityIndicatorView */,
+				FC3CB4271CB78CC900CA7D60 /* KRProgressHUD.swift */,
+				FC3CB4281CB78CC900CA7D60 /* KRProgressHUDIconType.swift */,
+			);
+			path = KRProgressHUD;
+			sourceTree = "<group>";
+		};
+		FC3CB4241CB78CC900CA7D60 /* KRActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				FC3CB4251CB78CC900CA7D60 /* KRActivityIndicatorView.swift */,
+				FC3CB4261CB78CC900CA7D60 /* KRActivityIndicatorViewStyle.swift */,
+			);
+			path = KRActivityIndicatorView;
 			sourceTree = "<group>";
 		};
 		FC9961911CA3FECF0030D55B = {
@@ -197,8 +214,8 @@
 		FCBA10961CA4EF22002E8DA8 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				FC3CB4231CB78CC900CA7D60 /* KRProgressHUD */,
 				FCF7034C1CAE63F500CE1565 /* Octicons */,
-				FCF299EF1CAA790B00B6EA0A /* TKSubmitTransition */,
 				FCBA10971CA4EF22002E8DA8 /* NavigationStack */,
 			);
 			path = 3rd;
@@ -222,18 +239,6 @@
 				FCFE8BCA1CB64D5B0051D3D9 /* GitHouseStyle.swift */,
 			);
 			name = Utils;
-			sourceTree = "<group>";
-		};
-		FCF299EF1CAA790B00B6EA0A /* TKSubmitTransition */ = {
-			isa = PBXGroup;
-			children = (
-				FCF299F01CAA790B00B6EA0A /* CGRectEx.swift */,
-				FCF299F11CAA790B00B6EA0A /* FadeTransition.swift */,
-				FCF299F21CAA790B00B6EA0A /* NSTimerEx.swift */,
-				FCF299F31CAA790B00B6EA0A /* SpinerLayer.swift */,
-				FCF299F41CAA790B00B6EA0A /* TransitionSubmitButton.swift */,
-			);
-			path = TKSubmitTransition;
 			sourceTree = "<group>";
 		};
 		FCF299FC1CAA8EB600B6EA0A /* Base */ = {
@@ -376,12 +381,12 @@
 				FCFE8BC91CB6471D0051D3D9 /* UIScrollView+GitHouse.swift in Sources */,
 				FCBA109D1CA4EF22002E8DA8 /* CollectionViewStackCell.swift in Sources */,
 				FCD983531CAD296500969491 /* RepositoriesTableCellTableViewCell.swift in Sources */,
-				FCF299F91CAA790B00B6EA0A /* TransitionSubmitButton.swift in Sources */,
 				FCBA109E1CA4EF22002E8DA8 /* CollectionViewStackFlowLayout.swift in Sources */,
 				FCE17F751CA90ED900CD7E39 /* GitHouseUtils.swift in Sources */,
 				FCD983511CAD288300969491 /* BaseNavigationController.swift in Sources */,
 				FCF703501CAE63F500CE1565 /* String+Octicons.swift in Sources */,
 				FCE17F7B1CA9248000CD7E39 /* RepositoriesViewController.swift in Sources */,
+				FC3CB4291CB78CC900CA7D60 /* KRActivityIndicatorView.swift in Sources */,
 				FCF703511CAE63F500CE1565 /* UIFont+Octicons.swift in Sources */,
 				FCF299FB1CAA8DBE00B6EA0A /* BaseViewController.swift in Sources */,
 				FCAFB2991CB3CD12006CB6C3 /* ContactsTableCell.swift in Sources */,
@@ -389,13 +394,12 @@
 				FCBA109F1CA4EF22002E8DA8 /* NavigationStack.swift in Sources */,
 				FCE17F791CA9175400CD7E39 /* ProfileViewController.swift in Sources */,
 				FCBA109C1CA4EF22002E8DA8 /* CollectionStackViewController.swift in Sources */,
+				FC3CB42C1CB78CC900CA7D60 /* KRProgressHUDIconType.swift in Sources */,
 				FCF703521CAE63F500CE1565 /* UIImage+Octicons.swift in Sources */,
-				FCF299F51CAA790B00B6EA0A /* CGRectEx.swift in Sources */,
 				FCADDD681CAB86DD00137AA3 /* BaseModeProtocoll.swift in Sources */,
-				FCF299F71CAA790B00B6EA0A /* NSTimerEx.swift in Sources */,
-				FCF299F61CAA790B00B6EA0A /* FadeTransition.swift in Sources */,
+				FC3CB42B1CB78CC900CA7D60 /* KRProgressHUD.swift in Sources */,
 				FCFE8BCB1CB64D5B0051D3D9 /* GitHouseStyle.swift in Sources */,
-				FCF299F81CAA790B00B6EA0A /* SpinerLayer.swift in Sources */,
+				FC3CB42A1CB78CC900CA7D60 /* KRActivityIndicatorViewStyle.swift in Sources */,
 				FCE17F7D1CA924C900CD7E39 /* ContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

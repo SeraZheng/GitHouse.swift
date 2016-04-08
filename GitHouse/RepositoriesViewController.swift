@@ -42,7 +42,9 @@ class RepositoriesViewController: BaseViewController {
         segmentedControl.layer.cornerRadius = 10
         segmentedControl.addTarget(self, action: #selector(segmentedAction), forControlEvents: UIControlEvents.ValueChanged)
         navigationItem.titleView = segmentedControl
-        loadingView.startAnimation()
+        
+        KRProgressHUD.show()
+        GitHouseUtils.isHomeLoaded = true
     }
     
     @objc private func segmentedAction(segmentedControl: UISegmentedControl) -> Void {
@@ -53,7 +55,7 @@ class RepositoriesViewController: BaseViewController {
             repositoriesType = RepositoriesType.owned
         }
         
-        loadingView.startAnimation()
+        KRProgressHUD.show()
         loadData()
     }
 
@@ -72,6 +74,7 @@ extension RepositoriesViewController {
     }
     
     private func authenticate() -> Void {
+        
         GitHouseUtils.octokit!.me { [weak self](response) in
             guard let strongSelf = self else { return }
             
@@ -88,11 +91,11 @@ extension RepositoriesViewController {
                 
                 dispatch_async(dispatch_get_main_queue(), { 
                     strongSelf.presentViewController(UserLoginViewController(authCompletion:{ (user) in
-                        strongSelf.loadingView.stopAnimation()
+                        KRProgressHUD.dismiss()
                         strongSelf.fetchResponsitories()
                         
                         strongSelf.dismissViewControllerAnimated(true, completion: {
-                            strongSelf.loadingView.startAnimation()
+                            KRProgressHUD.dismiss()
                         })
                     }), animated: true, completion: {})
                 })
@@ -111,7 +114,7 @@ extension RepositoriesViewController {
                 case .Success( let repositories):
                     strongSelf.allItems = repositories
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf.loadingView.stopAnimation()
+                        KRProgressHUD.dismiss()
                         strongSelf.tableView.reloadData()
                     })
                     
@@ -131,13 +134,13 @@ extension RepositoriesViewController {
                 case .Success( let repositories):
                     strongSelf.allItems = repositories
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf.loadingView.stopAnimation()
+                        KRProgressHUD.dismiss()
                         strongSelf.tableView.reloadData()
                     })
                     
                 case .Failure( _):
                     dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf.loadingView.stopAnimation()
+                        KRProgressHUD.dismiss()
                         strongSelf.modelDelegate?.showError!()
                     })
                 }

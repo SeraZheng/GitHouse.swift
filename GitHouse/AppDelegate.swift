@@ -22,22 +22,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
         
-        if GitHouseUtils.isValidated {
-            self.setHomeTabViewController(window!)
+        if !GitHouseUtils.isValidated {
+            setHomeTabViewController(window!)
         } else {
-            weak var weakSelf = self
-            window?.rootViewController = UserLoginViewController.init(authCompletion: { (user) in
-                let strongSelf = weakSelf!
-                strongSelf.setHomeTabViewController(self.window!)
+            
+            window?.rootViewController = UserLoginViewController(authCompletion: { [weak self](user) in
+                guard let strongSelf = self else { return }
+                strongSelf.setHomeTabViewController(strongSelf.window!)
             })
         }
         
         window?.makeKeyAndVisible()
-        
         return true
     }
 
-        //MARK: setRootViewController
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        if url.scheme == GitHouseUtils.urlScheme {
+            
+            KRProgressHUD.show(progressHUDStyle: KRProgressHUDStyle.BlackColor, maskType: KRProgressHUDMaskType.Clear, activityIndicatorStyle: KRProgressHUDActivityIndicatorStyle.White, font: nil, message: "Authenticating....".localized(), image: nil)
+            
+            GitHouseUtils.oAuthConfig.handleOpenURL(url) { [weak self]config in
+                dispatch_async(dispatch_get_main_queue(), { 
+                    
+                    guard let strongSelf = self else { return }
+                    
+                    GitHouseUtils.authenticated = true
+                    GitHouseUtils.accessToken = config.accessToken
+                    
+                    if GitHouseUtils.isHomeLoaded {
+                        
+                        GitHouseUtils.topViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        
+                        strongSelf.setHomeTabViewController(strongSelf.window!)
+                    }
+                })
+            }
+        }
+        
+        return false
+    }
+    
+    //MARK: setRootViewController
     
     func setHomeTabViewController(window: UIWindow) -> Void {
         
@@ -48,7 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let rootVC = UITabBarController.init(nibName: nil, bundle: nil)
         rootVC.viewControllers = [respositiesVC, discoverVC, profileVC]
+        window.addSubview(rootVC.view)
 
+        let loginVC = window.rootViewController
+        loginVC?.view.removeFromSuperview()
+        
         window.rootViewController = rootVC
     }
 
