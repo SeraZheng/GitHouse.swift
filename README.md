@@ -9,8 +9,8 @@ Git client for GitHub with Swift 2.0+, which depends on [OctoKit.swift](https://
 
 # Thirdy Party
 
-* [AlamofireImage](https://github.com/Alamofire/AlamofireImage)
 * [Octokit.swift](https://github.com/nerdishbynature/octokit.swift)
+* [AlamofireImage](https://github.com/Alamofire/AlamofireImage)
 * [TextFieldEffects](https://github.com/raulriera/TextFieldEffects)
 * [SnapKit](https://github.com/SnapKit/SnapKit)
 * [ChameleonFramework/Swift](https://github.com/ViccAlexander/Chameleon)
