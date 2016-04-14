@@ -11,18 +11,20 @@ import Octokit
 import AlamofireImage
 
 enum RepositoriesType {
-    case owned
-    case stared
+    case Owned
+    case Stared
 }
 
 class RepositoriesViewController: BaseViewController {
 
-    private var repositoriesType: RepositoriesType = RepositoriesType.owned
+    private var repositoriesType: RepositoriesType = RepositoriesType.Owned
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.refreshEnabled = true
-        self.tabBarItem = UITabBarItem(title: "Repositories".localized(), image: UIImage(named: "Repositories"), selectedImage: UIImage(named: "RepositoriesHighlighted"))
+        self.tabBarItem = UITabBarItem(title: "Repositories".localized(),
+                                       image: UIImage.octiconsImageFor(OcticonsID.Repo, iconColor: UIColor.flatGrayColor(), size: CGSizeMake(25, 25)),
+                                       selectedImage: UIImage.octiconsImageFor(OcticonsID.Repo, iconColor: UIColor.flatBlueColor(), size: CGSizeMake(25, 25)))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,9 +34,6 @@ class RepositoriesViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         title = "Respositories".localized()
-
-        tableView.estimatedRowHeight = 70
-        tableView.rowHeight = UITableViewAutomaticDimension
         
         let segmentedControl = UISegmentedControl.init(items: ["Owned".localized(), "Stared".localized()])
         segmentedControl.tintColor = UIColor.flatWhiteColor()
@@ -50,9 +49,8 @@ class RepositoriesViewController: BaseViewController {
     @objc private func segmentedAction(segmentedControl: UISegmentedControl) -> Void {
         switch segmentedControl.selectedSegmentIndex {
         case 1:
-            repositoriesType = RepositoriesType.stared
-        default:
-            repositoriesType = RepositoriesType.owned
+            repositoriesType = RepositoriesType.Stared
+        default:            repositoriesType = RepositoriesType.Owned
         }
         
         KRProgressHUD.show()
@@ -89,14 +87,17 @@ extension RepositoriesViewController {
                 
             case .Failure( _):
                 
-                dispatch_async(dispatch_get_main_queue(), { 
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    KRProgressHUD.showInfo(progressHUDStyle: nil, maskType: nil, activityIndicatorStyle: nil, font: nil, message: "Authentication Failed".localized())
+                    
                     strongSelf.presentViewController(UserLoginViewController(authCompletion:{ (user) in
-                        KRProgressHUD.dismiss()
+                        
+                        strongSelf.dismissViewControllerAnimated(true, completion: nil)
+                        
+                        KRProgressHUD.show()
                         strongSelf.fetchResponsitories()
                         
-                        strongSelf.dismissViewControllerAnimated(true, completion: {
-                            KRProgressHUD.dismiss()
-                        })
                     }), animated: true, completion: {})
                 })
             }
@@ -105,45 +106,31 @@ extension RepositoriesViewController {
     
     private func fetchResponsitories() -> Void {
         
-        switch repositoriesType {
-        case RepositoriesType.stared:
-            GitHouseUtils.octokit!.myStars({ [weak self](response) in
-                guard let strongSelf = self else { return }
+//        var type: String?
+//        switch repositoriesType {
+//        case RepositoriesType.Stared:
+//            type = "stared"
+//        default:
+//            type = "owned"
+//        }
+        
+        GitHouseUtils.octokit!.repositories() { [weak self] (response) in
+            
+            guard let strongSelf = self else { return }
+            
+            switch response {
+            case .Success( let repositories):
+                strongSelf.allItems = repositories
+                dispatch_async(dispatch_get_main_queue(), {
+                    KRProgressHUD.dismiss()
+                    strongSelf.tableView.reloadData()
+                })
                 
-                switch response {
-                case .Success( let repositories):
-                    strongSelf.allItems = repositories
-                    dispatch_async(dispatch_get_main_queue(), {
-                        KRProgressHUD.dismiss()
-                        strongSelf.tableView.reloadData()
-                    })
-                    
-                case .Failure( _):
-                    dispatch_async(dispatch_get_main_queue(), {
-                        strongSelf.modelDelegate?.showError!()
-                    })
-                }
-
-            })
-        default:
-            GitHouseUtils.octokit!.repositories() { [weak self] (response) in
-                
-                guard let strongSelf = self else { return }
-                
-                switch response {
-                case .Success( let repositories):
-                    strongSelf.allItems = repositories
-                    dispatch_async(dispatch_get_main_queue(), {
-                        KRProgressHUD.dismiss()
-                        strongSelf.tableView.reloadData()
-                    })
-                    
-                case .Failure( _):
-                    dispatch_async(dispatch_get_main_queue(), {
-                        KRProgressHUD.dismiss()
-                        strongSelf.modelDelegate?.showError!()
-                    })
-                }
+            case .Failure( _):
+                dispatch_async(dispatch_get_main_queue(), {
+                    KRProgressHUD.dismiss()
+                    strongSelf.modelDelegate?.showError!()
+                })
             }
         }
     }

@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02B258E2619097D910D09C57 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4952F214C7C4B8EA08D91257 /* Pods.framework */; };
+		A006FD7622531AF3A5843BAE /* Pods_GitHouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 980C55C47EBEC9B4DD1A47FD /* Pods_GitHouse.framework */; };
 		FC2788091CAA981500477EB9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC27880B1CAA981500477EB9 /* Localizable.strings */; };
 		FC3CB4291CB78CC900CA7D60 /* KRActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CB4251CB78CC900CA7D60 /* KRActivityIndicatorView.swift */; };
 		FC3CB42A1CB78CC900CA7D60 /* KRActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CB4261CB78CC900CA7D60 /* KRActivityIndicatorViewStyle.swift */; };
 		FC3CB42B1CB78CC900CA7D60 /* KRProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CB4271CB78CC900CA7D60 /* KRProgressHUD.swift */; };
 		FC3CB42C1CB78CC900CA7D60 /* KRProgressHUDIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CB4281CB78CC900CA7D60 /* KRProgressHUDIconType.swift */; };
+		FC7A36441CBF8562001A458D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7A36431CBF8562001A458D /* WebKit.framework */; };
+		FC7A364D1CBFA9B4001A458D /* IssueTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A364C1CBFA9B4001A458D /* IssueTableCell.swift */; };
+		FC81A1891CBE60AD0096AB25 /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC81A1881CBE60AD0096AB25 /* IssueViewController.swift */; };
 		FC99619E1CA3FECF0030D55B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC99619D1CA3FECF0030D55B /* AppDelegate.swift */; };
 		FC9961A51CA3FECF0030D55B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC9961A41CA3FECF0030D55B /* Assets.xcassets */; };
 		FCADDD681CAB86DD00137AA3 /* BaseModeProtocoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCADDD671CAB86DD00137AA3 /* BaseModeProtocoll.swift */; };
@@ -22,6 +25,8 @@
 		FCBA109E1CA4EF22002E8DA8 /* CollectionViewStackFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA109A1CA4EF22002E8DA8 /* CollectionViewStackFlowLayout.swift */; };
 		FCBA109F1CA4EF22002E8DA8 /* NavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA109B1CA4EF22002E8DA8 /* NavigationStack.swift */; };
 		FCBA10A21CA4F4AC002E8DA8 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA10A11CA4F4AC002E8DA8 /* UserLoginViewController.swift */; };
+		FCCC03F51CBE2B1A00EA21B0 /* GitHouseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC03F41CBE2B1A00EA21B0 /* GitHouseAPI.swift */; };
+		FCCC03F71CBE2BE800EA21B0 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC03F61CBE2BE800EA21B0 /* Authentication.swift */; };
 		FCD983511CAD288300969491 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD983501CAD288300969491 /* BaseNavigationController.swift */; };
 		FCD983531CAD296500969491 /* RepositoriesTableCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD983521CAD296500969491 /* RepositoriesTableCellTableViewCell.swift */; };
 		FCE17F751CA90ED900CD7E39 /* GitHouseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F741CA90ED900CD7E39 /* GitHouseUtils.swift */; };
@@ -43,9 +48,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		05DC147C721A48FEE86C625A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4952F214C7C4B8EA08D91257 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6ACD699026F9D87AFA3225E1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		980C55C47EBEC9B4DD1A47FD /* Pods_GitHouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF003C798A8E716BD9B65C79 /* Pods-GitHouse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHouse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHouse/Pods-GitHouse.debug.xcconfig"; sourceTree = "<group>"; };
+		D0224E4AA652D5B8EF9A6AA3 /* Pods-GitHouse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHouse.release.xcconfig"; path = "Pods/Target Support Files/Pods-GitHouse/Pods-GitHouse.release.xcconfig"; sourceTree = "<group>"; };
 		FC27880A1CAA981500477EB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FC27880C1CAA981800477EB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FC27880D1CAA981900477EB9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -53,6 +59,9 @@
 		FC3CB4261CB78CC900CA7D60 /* KRActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
 		FC3CB4271CB78CC900CA7D60 /* KRProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRProgressHUD.swift; sourceTree = "<group>"; };
 		FC3CB4281CB78CC900CA7D60 /* KRProgressHUDIconType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRProgressHUDIconType.swift; sourceTree = "<group>"; };
+		FC7A36431CBF8562001A458D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		FC7A364C1CBFA9B4001A458D /* IssueTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueTableCell.swift; sourceTree = "<group>"; };
+		FC81A1881CBE60AD0096AB25 /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		FC99619A1CA3FECF0030D55B /* GitHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC99619D1CA3FECF0030D55B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC9961A41CA3FECF0030D55B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = GitHouse/Assets.xcassets; sourceTree = "<group>"; };
@@ -63,6 +72,8 @@
 		FCBA109A1CA4EF22002E8DA8 /* CollectionViewStackFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewStackFlowLayout.swift; sourceTree = "<group>"; };
 		FCBA109B1CA4EF22002E8DA8 /* NavigationStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationStack.swift; sourceTree = "<group>"; };
 		FCBA10A11CA4F4AC002E8DA8 /* UserLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginViewController.swift; sourceTree = "<group>"; };
+		FCCC03F41CBE2B1A00EA21B0 /* GitHouseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHouseAPI.swift; sourceTree = "<group>"; };
+		FCCC03F61CBE2BE800EA21B0 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		FCD983501CAD288300969491 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		FCD983521CAD296500969491 /* RepositoriesTableCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoriesTableCellTableViewCell.swift; sourceTree = "<group>"; };
 		FCE17F741CA90ED900CD7E39 /* GitHouseUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHouseUtils.swift; sourceTree = "<group>"; };
@@ -88,36 +99,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC7A36441CBF8562001A458D /* WebKit.framework in Frameworks */,
 				FCF29A0A1CAA8F9A00B6EA0A /* AVKit.framework in Frameworks */,
 				FCF29A061CAA8F7000B6EA0A /* CoreGraphics.framework in Frameworks */,
 				FCF29A041CAA8F6800B6EA0A /* Foundation.framework in Frameworks */,
 				FCF29A021CAA8F5F00B6EA0A /* UIKit.framework in Frameworks */,
-				02B258E2619097D910D09C57 /* Pods.framework in Frameworks */,
+				A006FD7622531AF3A5843BAE /* Pods_GitHouse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2AF2DE5179A22A390B32BC3D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6ACD699026F9D87AFA3225E1 /* Pods.debug.xcconfig */,
-				05DC147C721A48FEE86C625A /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		A50892F8A85033F3F91A20B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC7A36431CBF8562001A458D /* WebKit.framework */,
 				FCF29A091CAA8F9A00B6EA0A /* AVKit.framework */,
 				FCF29A051CAA8F7000B6EA0A /* CoreGraphics.framework */,
 				FCF29A031CAA8F6800B6EA0A /* Foundation.framework */,
 				FCF29A011CAA8F5F00B6EA0A /* UIKit.framework */,
 				4952F214C7C4B8EA08D91257 /* Pods.framework */,
+				980C55C47EBEC9B4DD1A47FD /* Pods_GitHouse.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4BAA46920E1A1C7E2F90CD5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BF003C798A8E716BD9B65C79 /* Pods-GitHouse.debug.xcconfig */,
+				D0224E4AA652D5B8EF9A6AA3 /* Pods-GitHouse.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		FC2788021CAA959200477EB9 /* Resource */ = {
@@ -129,6 +143,15 @@
 				FC27880B1CAA981500477EB9 /* Localizable.strings */,
 			);
 			name = Resource;
+			sourceTree = "<group>";
+		};
+		FC35EEAE1CBE5FFF0047D361 /* issue */ = {
+			isa = PBXGroup;
+			children = (
+				FC81A1881CBE60AD0096AB25 /* IssueViewController.swift */,
+				FC7A364C1CBFA9B4001A458D /* IssueTableCell.swift */,
+			);
+			name = issue;
 			sourceTree = "<group>";
 		};
 		FC3CB4231CB78CC900CA7D60 /* KRProgressHUD */ = {
@@ -156,8 +179,8 @@
 				FC99619C1CA3FECF0030D55B /* GitHouse */,
 				FC2788021CAA959200477EB9 /* Resource */,
 				FC99619B1CA3FECF0030D55B /* Products */,
-				2AF2DE5179A22A390B32BC3D /* Pods */,
 				A50892F8A85033F3F91A20B3 /* Frameworks */,
+				E4BAA46920E1A1C7E2F90CD5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,6 +223,7 @@
 		FCBA10941CA4EEB7002E8DA8 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				FC35EEAE1CBE5FFF0047D361 /* issue */,
 				FCFE8BCC1CB64EB10051D3D9 /* Login */,
 				FCFE8BC71CB646FD0051D3D9 /* Extensions */,
 				FCAFB2971CB3C8BA006CB6C3 /* Contact */,
@@ -237,6 +261,8 @@
 			children = (
 				FCE17F741CA90ED900CD7E39 /* GitHouseUtils.swift */,
 				FCFE8BCA1CB64D5B0051D3D9 /* GitHouseStyle.swift */,
+				FCCC03F41CBE2B1A00EA21B0 /* GitHouseAPI.swift */,
+				FCCC03F61CBE2BE800EA21B0 /* Authentication.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -292,10 +318,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC9961AC1CA3FECF0030D55B /* Build configuration list for PBXNativeTarget "GitHouse" */;
 			buildPhases = (
+				7A0B41D308AE0EBA6BD3005E /* 📦 Check Pods Manifest.lock */,
 				FC9961961CA3FECF0030D55B /* Sources */,
 				FC9961971CA3FECF0030D55B /* Frameworks */,
 				FC9961981CA3FECF0030D55B /* Resources */,
-				763E128E82CB44FC8F185EDA /* Embed Pods Frameworks */,
+				0D64F8DF438A3281EF197048 /* 📦 Embed Pods Frameworks */,
+				528E344726DEE16549E75534 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -355,19 +383,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		763E128E82CB44FC8F185EDA /* Embed Pods Frameworks */ = {
+		0D64F8DF438A3281EF197048 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GitHouse/Pods-GitHouse-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		528E344726DEE16549E75534 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GitHouse/Pods-GitHouse-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A0B41D308AE0EBA6BD3005E /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -377,6 +435,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC7A364D1CBFA9B4001A458D /* IssueTableCell.swift in Sources */,
+				FC81A1891CBE60AD0096AB25 /* IssueViewController.swift in Sources */,
 				FC99619E1CA3FECF0030D55B /* AppDelegate.swift in Sources */,
 				FCFE8BC91CB6471D0051D3D9 /* UIScrollView+GitHouse.swift in Sources */,
 				FCBA109D1CA4EF22002E8DA8 /* CollectionViewStackCell.swift in Sources */,
@@ -393,6 +453,8 @@
 				FCBA10A21CA4F4AC002E8DA8 /* UserLoginViewController.swift in Sources */,
 				FCBA109F1CA4EF22002E8DA8 /* NavigationStack.swift in Sources */,
 				FCE17F791CA9175400CD7E39 /* ProfileViewController.swift in Sources */,
+				FCCC03F51CBE2B1A00EA21B0 /* GitHouseAPI.swift in Sources */,
+				FCCC03F71CBE2BE800EA21B0 /* Authentication.swift in Sources */,
 				FCBA109C1CA4EF22002E8DA8 /* CollectionStackViewController.swift in Sources */,
 				FC3CB42C1CB78CC900CA7D60 /* KRProgressHUDIconType.swift in Sources */,
 				FCF703521CAE63F500CE1565 /* UIImage+Octicons.swift in Sources */,
@@ -507,7 +569,7 @@
 		};
 		FC9961AD1CA3FECF0030D55B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6ACD699026F9D87AFA3225E1 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = BF003C798A8E716BD9B65C79 /* Pods-GitHouse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GitHouse/Info.plist;
@@ -520,7 +582,7 @@
 		};
 		FC9961AE1CA3FECF0030D55B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05DC147C721A48FEE86C625A /* Pods.release.xcconfig */;
+			baseConfigurationReference = D0224E4AA652D5B8EF9A6AA3 /* Pods-GitHouse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GitHouse/Info.plist;

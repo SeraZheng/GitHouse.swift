@@ -13,16 +13,19 @@ import SnapKit
 import ChameleonFramework
 import Octokit
 import KeychainAccess
+import Alamofire
+import Spring
 
 class UserLoginViewController: UIViewController, UITextFieldDelegate {
 
     private let logoView = UIImageView(image: UIImage(named: "Logo"))
     private let usernameField = YoshikoTextField()
-    private let loginButton = UIButton(frame: CGRectZero)
+    private let passwordField = YoshikoTextField()
+    private let loginButton = SpringButton(frame: CGRectZero)
     private let authenticateButton = UIButton(frame: CGRectZero)
-    private var authCompletion:((user: User) ->Void)?
+    private var authCompletion:(() ->Void)?
     
-    init(authCompletion:(user: User) -> Void) {
+    init(authCompletion:() -> Void) {
         super.init(nibName: nil, bundle: nil)
         self.authCompletion = authCompletion
     }
@@ -47,10 +50,10 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
         usernameField.clearButtonMode = UITextFieldViewMode.WhileEditing
         usernameField.backgroundColor = UIColor.whiteColor()
         usernameField.minimumFontSize = 19
-        usernameField.returnKeyType = UIReturnKeyType.Done
+        usernameField.returnKeyType = UIReturnKeyType.Next
         usernameField.activeBorderColor = UIColor.flatOrangeColor()
         usernameField.inactiveBorderColor = UIColor.flatWhiteColor()
-        usernameField.placeholder = "Please input your Access Token".localized()
+        usernameField.placeholder = "Please input your username or email".localized()
         usernameField.placeholderColor = UIColor.flatBlackColor()
         usernameField.delegate = self
         view.addSubview(usernameField)
@@ -62,6 +65,25 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
             make.height.equalTo(60)
         }
         
+        passwordField.clearButtonMode = UITextFieldViewMode.WhileEditing
+        passwordField.backgroundColor = UIColor.whiteColor()
+        passwordField.minimumFontSize = 19
+        passwordField.returnKeyType = UIReturnKeyType.Done
+        passwordField.secureTextEntry = true
+        passwordField.activeBorderColor = UIColor.flatOrangeColor()
+        passwordField.inactiveBorderColor = UIColor.flatWhiteColor()
+        passwordField.placeholder = "Please input your password".localized()
+        passwordField.placeholderColor = UIColor.flatBlackColor()
+        passwordField.delegate = self
+        view.addSubview(passwordField)
+        
+        passwordField.snp_makeConstraints { (make) in
+            make.top.equalTo(usernameField.snp_bottom).offset(20)
+            make.left.equalTo(usernameField)
+            make.right.equalTo(usernameField)
+            make.height.equalTo(usernameField)
+        }
+        
         loginButton.enabled = false
         loginButton.backgroundColor = UIColor.flatGrayColor()
         loginButton.layer.cornerRadius = 5
@@ -70,7 +92,7 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(loginButton)
         
         loginButton.snp_makeConstraints { (make) in
-            make.top.equalTo(usernameField.snp_bottom).offset(20)
+            make.top.equalTo(passwordField.snp_bottom).offset(20)
             make.left.equalTo(usernameField)
             make.right.equalTo(usernameField)
             make.height.equalTo(40)
@@ -135,29 +157,60 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
     
     func loginAction() -> Void {
         
-        let config = TokenConfiguration(usernameField.text)
-        
+        usernameField.resignFirstResponder()
+        passwordField.resignFirstResponder()
         KRProgressHUD.show(progressHUDStyle: KRProgressHUDStyle.Black, maskType: KRProgressHUDMaskType.Clear, activityIndicatorStyle: KRProgressHUDActivityIndicatorStyle.White, font: nil, message: "Authenticating...".localized(), image: nil)
         
-        Octokit(config).me() {[weak self] response in
-            dispatch_async(dispatch_get_main_queue(), {
+        authorizate()
+    }
+    
+    private func authorizate() {
+        
+        let username = usernameField.text!
+        let password = passwordField.text!
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: NSData = loginString.dataUsingEncoding(NSASCIIStringEncoding)!
+        let base64LoginString = loginData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        let authorizationHeaderStr = "Basic \(base64LoginString)"
+        
+        Alamofire.request(.PUT, "https://api.github.com/authorizations/clients/\(GitHouseUtils.oAuthToken)", parameters: ["scopes": GitHouseUtils.oAuthScopes, "client_secret": GitHouseUtils.oAuthSecret], encoding: ParameterEncoding.JSON, headers: ["Authorization": authorizationHeaderStr])
+            .response { [weak self] request, response, data, error in
                 
                 guard let strongSelf = self else { return }
                 
-                switch response {
-                case .Success(let user):
-                    GitHouseUtils.accessToken = strongSelf.usernameField.text
-                    GitHouseUtils.myProfile = user
-                    GitHouseUtils.authenticated = true
+                dispatch_async(dispatch_get_main_queue(), {
                     
-                    KRProgressHUD.dismiss()
-                    strongSelf.authCompletion!(user: user)
-                    
-                    
-                default:
-                    KRProgressHUD.dismiss()
-                }
-            })
+                    if response?.statusCode != 200 && response?.statusCode != 201{
+                        strongSelf.loginButton.animation = "shake"
+                        strongSelf.loginButton.animate()
+                        
+                        KRProgressHUD.dismiss()
+                    } else {
+                        do {
+                            let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                            
+                            let token = result["token"] as? String
+                            if token?.characters.count == 0 {
+                                
+                                Alamofire.request(.DELETE, "https://api.github.com/authorizations/\(result["id"]!)", parameters: nil, encoding: .JSON, headers: ["Authorization": authorizationHeaderStr]).response(completionHandler: { (_, _, _, _) in
+                                    
+                                    strongSelf.authorizate()
+                                })
+                                
+                                return
+                            }
+                            
+                            KRProgressHUD.dismiss()
+                            
+                            GitHouseUtils.accessToken = token
+                            GitHouseUtils.authenticated = true
+                            
+                            strongSelf.authCompletion!()
+                        } catch {
+                            fatalError()
+                        }
+                    }
+                })
         }
     }
     
@@ -175,10 +228,13 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
             loginButton.backgroundColor = UIColor.flatGrayColor()
             loginButton.enabled = false
         }
-        else {
+        else if textField == usernameField && passwordField.text?.characters.count > 0 ||
+                textField == passwordField && usernameField.text?.characters.count > 0{
+            
             loginButton.backgroundColor = UIColor.flatOrangeColor()
             loginButton.enabled = true
         }
+        
         
         return true
     }
@@ -192,6 +248,9 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        guard textField == passwordField else { passwordField.becomeFirstResponder(); return false}
+        
         textField.resignFirstResponder()
         return true
     }

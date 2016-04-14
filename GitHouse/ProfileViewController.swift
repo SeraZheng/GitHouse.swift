@@ -15,7 +15,9 @@ class ProfileViewController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nil, bundle: nil)
-        self.tabBarItem = UITabBarItem(title: "Profile".localized(), image: UIImage(named: "Profile"), selectedImage: UIImage(named: "ProfileHighlighted"))
+        self.tabBarItem = UITabBarItem(title: "Profile".localized(),
+                                       image: UIImage.octiconsImageFor(OcticonsID.Person, iconColor: UIColor.flatGrayColor(), size: CGSizeMake(25, 25)),
+                                       selectedImage: UIImage.octiconsImageFor(OcticonsID.Person, iconColor: UIColor.flatBlueColor(), size: CGSizeMake(25, 25)))
     }
     
     required init?(coder aDecoder: NSCoder) {

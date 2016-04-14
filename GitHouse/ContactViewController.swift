@@ -21,7 +21,9 @@ class ContactViewController: BaseViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.refreshEnabled = true
 
-        self.tabBarItem = UITabBarItem(title: "Contact".localized(), image: UIImage(named: "Discover"), selectedImage: UIImage(named: "DiscoverHighlighted"))
+        self.tabBarItem = UITabBarItem(title: "Contact".localized(),
+                                       image: UIImage.octiconsImageFor(OcticonsID.Star, iconColor: UIColor.flatGrayColor(), size: CGSizeMake(25, 25)),
+                                       selectedImage: UIImage.octiconsImageFor(OcticonsID.Star, iconColor: UIColor.flatBlueColor(), size: CGSizeMake(25, 25)))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -61,7 +63,8 @@ extension ContactViewController {
 
         switch contactType {
         case ContactType.followings:
-            GitHouseUtils.octokit!.myFollowing({ [weak self](response) in
+            
+            GitHouseUtils.octokit?.myFollowing(completion: { [weak self] (response) in
                 guard let strongSelf = self else { return }
                 
                 switch response {
@@ -74,30 +77,33 @@ extension ContactViewController {
                     
                 case .Failure( _):
                     dispatch_async(dispatch_get_main_queue(), {
+                        KRProgressHUD.showError()
+                        strongSelf.modelDelegate?.showError!()
+                    })
+                }
+
+            })
+            
+        default:
+            GitHouseUtils.octokit!.myFollowers(completion: { [weak self](response) in
+                
+                guard let strongSelf = self else { return }
+                
+                switch response {
+                case .Success( let contacts):
+                    strongSelf.allItems = contacts
+                    dispatch_async(dispatch_get_main_queue(), {
+                        KRProgressHUD.dismiss()
+                        strongSelf.tableView.reloadData()
+                    })
+                    
+                case .Failure( _):
+                    dispatch_async(dispatch_get_main_queue(), {
+                        KRProgressHUD.showError()
                         strongSelf.modelDelegate?.showError!()
                     })
                 }
             })
-        default:
-            GitHouseUtils.octokit!.myFollowers { [weak self](response) in
-                
-                guard let strongSelf = self else { return }
-                
-                switch response {
-                case .Success( let contacts):
-                    strongSelf.allItems = contacts
-                    dispatch_async(dispatch_get_main_queue(), {
-                        KRProgressHUD.dismiss()
-                        strongSelf.tableView.reloadData()
-                    })
-                    
-                case .Failure( _):
-                    dispatch_async(dispatch_get_main_queue(), {
-                        KRProgressHUD.dismiss()
-                        strongSelf.modelDelegate?.showError!()
-                    })
-                }
-            }
         }
         
     }

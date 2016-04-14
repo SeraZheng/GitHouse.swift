@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow.init(frame: UIScreen.mainScreen().bounds)
         
-        if !GitHouseUtils.isValidated {
+        if GitHouseUtils.isValidated {
             setHomeTabViewController(window!)
         } else {
             
@@ -42,8 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             KRProgressHUD.show(progressHUDStyle: KRProgressHUDStyle.BlackColor, maskType: KRProgressHUDMaskType.Clear, activityIndicatorStyle: KRProgressHUDActivityIndicatorStyle.White, font: nil, message: "Authenticating....".localized(), image: nil)
             
-            GitHouseUtils.oAuthConfig.handleOpenURL(url) { [weak self]config in
-                dispatch_async(dispatch_get_main_queue(), { 
+            GitHouseUtils.oAuthConfig.handleOpenURL(url: url, completion: { [weak self] (config) in
+                dispatch_async(dispatch_get_main_queue(), {
                     
                     guard let strongSelf = self else { return }
                     
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         strongSelf.setHomeTabViewController(strongSelf.window!)
                     }
                 })
-            }
+            })
         }
         
         return false
@@ -68,13 +68,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setHomeTabViewController(window: UIWindow) -> Void {
         
-//        let newsVC = NewsViewController(nibName: nil, bundle: nil)
         let respositiesVC = BaseNavigationController.init(rootViewController:RepositoriesViewController(nibName: nil, bundle: nil))
-        let discoverVC = UINavigationController.init(rootViewController:ContactViewController(nibName: nil, bundle: nil))
-        let profileVC = UINavigationController.init(rootViewController:ProfileViewController())
+        let issueVC = BaseNavigationController.init(rootViewController:IssuesViewController(nibName: nil, bundle: nil))
+        let contactVC = BaseNavigationController.init(rootViewController:ContactViewController(nibName: nil, bundle: nil))
+        let profileVC = BaseNavigationController.init(rootViewController:ProfileViewController())
         
         let rootVC = UITabBarController.init(nibName: nil, bundle: nil)
-        rootVC.viewControllers = [respositiesVC, discoverVC, profileVC]
+        rootVC.viewControllers = [respositiesVC, issueVC, contactVC, profileVC]
         window.addSubview(rootVC.view)
 
         let loginVC = window.rootViewController
