@@ -23,6 +23,7 @@ public struct GitHouseUtils {
     public static let oAuthConfig = OAuthConfiguration(token: oAuthToken, secret: oAuthSecret, scopes: oAuthScopes)
     
     public static var octokit: Octokit?
+    public static var authorizationToken: String?
     
     public static var accessToken: String? {
         didSet {

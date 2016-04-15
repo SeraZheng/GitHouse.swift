@@ -106,14 +106,6 @@ extension RepositoriesViewController {
     
     private func fetchResponsitories() -> Void {
         
-//        var type: String?
-//        switch repositoriesType {
-//        case RepositoriesType.Stared:
-//            type = "stared"
-//        default:
-//            type = "owned"
-//        }
-        
         GitHouseUtils.octokit!.repositories() { [weak self] (response) in
             
             guard let strongSelf = self else { return }

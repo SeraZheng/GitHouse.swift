@@ -15,15 +15,16 @@ public struct Provider {
     
     private static var endpointsClosure = { (target: GitHouseAPI) -> Endpoint<GitHouseAPI> in
         
-        var endpoint: Endpoint<GitHouseAPI> = Endpoint<GitHouseAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+        var endpoint: Endpoint<GitHouseAPI> = Endpoint<GitHouseAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters, parameterEncoding:.JSON)
         // Sign all non-XApp token requests
         
         switch target {
             
         default:
+
             endpoint.endpointByAddingHTTPHeaderFields(["User-Agent":"GitHouse"])
             
-            return endpoint.endpointByAddingHTTPHeaderFields(["Authorization": Authentication.userToken ?? ""])
+            return endpoint.endpointByAddingHTTPHeaderFields(["Authorization": GitHouseUtils.authorizationToken!])
         }
     }
     
@@ -31,6 +32,19 @@ public struct Provider {
 }
 
 public enum GitHouseAPI {
+    
+    //authenticate
+    case ListAuthorization
+    case GetSingleAuthorization(id:String)
+    case CreateNewAuthorization(clientID:String, clientSecret:String, scopes:Array<String>, note:String?, noteURL:String?, fingerprint:String?)
+    case GetOrCreateParticularAuthorization(clientID:String, clientSecret:String, scopes:Array<String>)
+    case GetOrCreateParticularAuthorizationWithFingerprint(clientID:String, fingerprint:String, clientSecret:String, scopes:Array<String>, note:String?, noteURL:String?)
+    case UpdateAuthorization(id:String, scopes:Array<String>, addScopes:Array<String>, removeScopes:Array<String>, note:String?, noteURL:String?, fingerprint:String?)
+    case DeleteAuthorization(id:String)
+    case CheckAuthorization(username:String, password:String, accessToken:String)
+    case ResetAuthorization(username:String, password:String, accessToken:String)
+    case RevokeAuthorization(username:String, password:String, accessToekn:String)
+    
     //user
     case MyInfo
     case UserInfo(username:String)
@@ -138,6 +152,29 @@ extension GitHouseAPI: TargetType {
     
     public var path: String {
         switch self {
+            
+        //authenticate
+        case .ListAuthorization:
+            return "/authorizations"
+        case .GetSingleAuthorization(let id):
+            return "/authorizations/\(id)"
+        case .CreateNewAuthorization(_,_,_,_,_,_):
+            return "/authorizations"
+        case .GetOrCreateParticularAuthorization(let clientID,_,_):
+            return "/authorizations/clients/\(clientID)"
+        case .GetOrCreateParticularAuthorizationWithFingerprint(let clientID, let fingerprint,_,_,_,_):
+            return "/authorizations/clients/\(clientID)/\(fingerprint)"
+        case .UpdateAuthorization(let id,_,_,_,_,_,_):
+            return "/authorizations/\(id)"
+        case .DeleteAuthorization(let id):
+            return "/authorizations/\(id)"
+        case .CheckAuthorization(let username,_, let accessToken):
+            return "/applications/\(username)/tokens/\(accessToken)"
+        case .ResetAuthorization(let username,_,let accessToken):
+            return "/applications/\(username)/tokens/\(accessToken)"
+        case .RevokeAuthorization(let username,_, let accessToekn):
+            return "/applications/\(username)/tokens/\(accessToekn)"
+            
         //user
         case .MyInfo:
             return "/user"
@@ -301,6 +338,23 @@ extension GitHouseAPI: TargetType {
     public var method: Moya.Method {
         
         switch self {
+            
+        //authenticate
+        case .CreateNewAuthorization(_,_,_,_,_,_):
+            return .POST
+        case .GetOrCreateParticularAuthorization(_,_,_):
+            return .PUT
+        case .GetOrCreateParticularAuthorizationWithFingerprint(_,_,_,_,_,_):
+            return .PUT
+        case .UpdateAuthorization(_,_,_,_,_,_,_):
+            return .PATCH
+        case .DeleteAuthorization(_):
+            return .DELETE
+        case .ResetAuthorization(_,_,_):
+            return .POST
+        case .RevokeAuthorization(_,_,_):
+            return .DELETE
+            
         case .UpdateUserInfo:
             return .PATCH
         //user email
@@ -349,7 +403,39 @@ extension GitHouseAPI: TargetType {
     public var parameters: [String: AnyObject]? {
         
         switch self {
-            
+        
+        //authenticate
+        case .CreateNewAuthorization(let clientID, let clientSecret, let scopes, let note, let noteURL, let fingerprint):
+            return [
+                "scopes":scopes,
+                "note":note ?? "githouse",
+                "note_url":noteURL ?? "githouse://authorization",
+                "client_id":clientID,
+                "client_secret":clientSecret,
+                "fingerprint":fingerprint ?? "githouse"
+            ]
+        case .GetOrCreateParticularAuthorization(_,let clientSecret, let scopes):
+            return [
+                "scopes":scopes,
+                "client_secret":clientSecret
+            ]
+        case .GetOrCreateParticularAuthorizationWithFingerprint(_,let clientSecret, let scopes, let note, let noteURL,_):
+            return [
+                "scopes":scopes,
+                "note":note,
+                "note_url":noteURL ?? "githouse://authorization",
+                "client_secret":clientSecret,
+            ]
+        case .UpdateAuthorization(_, let scopes, let addScopes, let removeScopes, let note, let noteURL, let fingerprint):
+            return [
+                "scopes":scopes,
+                "add_scopes":addScopes,
+                "remove_scopes":removeScopes,
+                "note":note ?? "githouse",
+                "note_url":noteURL ?? "githouse://authorization",
+                "fingerprint":fingerprint ?? "githouse"
+            ]
+
         //follower
         case .UserFollowers(let page,let perpage, _):
             return [

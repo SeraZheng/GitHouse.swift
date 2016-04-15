@@ -171,37 +171,77 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
         let loginString = NSString(format: "%@:%@", username, password)
         let loginData: NSData = loginString.dataUsingEncoding(NSASCIIStringEncoding)!
         let base64LoginString = loginData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
-        let authorizationHeaderStr = "Basic \(base64LoginString)"
+        GitHouseUtils.authorizationToken = "Basic \(base64LoginString)"
         
-        Alamofire.request(.PUT, "https://api.github.com/authorizations/clients/\(GitHouseUtils.oAuthToken)", parameters: ["scopes": GitHouseUtils.oAuthScopes, "client_secret": GitHouseUtils.oAuthSecret], encoding: ParameterEncoding.JSON, headers: ["Authorization": authorizationHeaderStr])
-            .response { [weak self] request, response, data, error in
-                
-                guard let strongSelf = self else { return }
+//        Alamofire.request(.PUT, "https://api.github.com/authorizations/clients/\(GitHouseUtils.oAuthToken)", parameters: ["scopes": GitHouseUtils.oAuthScopes, "client_secret": GitHouseUtils.oAuthSecret], encoding: ParameterEncoding.JSON, headers: ["Authorization": GitHouseUtils.authorizationToken!])
+//            .response { [weak self] request, response, data, error in
+//                
+//                guard let strongSelf = self else { return }
+//                
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    
+//                    if response?.statusCode != 200 && response?.statusCode != 201{
+//                        strongSelf.loginButton.animation = "shake"
+//                        strongSelf.loginButton.animate()
+//                        
+//                        KRProgressHUD.dismiss()
+//                    } else {
+//                        do {
+//                            let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+//                            
+//                            let token = result["token"] as? String
+//                            if token?.characters.count == 0 {
+//                                
+//                                Alamofire.request(.DELETE, "https://api.github.com/authorizations/\(result["id"]!)", parameters: nil, encoding: .JSON, headers: ["Authorization": GitHouseUtils.authorizationToken!]).response(completionHandler: { (_, _, _, _) in
+//                                    
+//                                    strongSelf.authorizate()
+//                                })
+//                                
+//                                return
+//                            }
+//                            
+//                            KRProgressHUD.dismiss()
+//                            
+//                            GitHouseUtils.accessToken = token
+//                            GitHouseUtils.authenticated = true
+//                            
+//                            strongSelf.authCompletion!()
+//                        } catch {
+//                            fatalError()
+//                        }
+//                    }
+//                })
+//        }
+        
+        Provider.gitHouseProvider.request(GitHouseAPI.GetOrCreateParticularAuthorization(clientID: GitHouseUtils.oAuthToken, clientSecret: GitHouseUtils.oAuthSecret, scopes: GitHouseUtils.oAuthScopes)) { [weak self] (result) in
+            
+            guard let strongSelf = self else { return }
+            
+            switch result {
+            case .Success(let response):
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    if response?.statusCode != 200 && response?.statusCode != 201{
+                    if response.statusCode != 200 && response.statusCode != 201{
                         strongSelf.loginButton.animation = "shake"
                         strongSelf.loginButton.animate()
                         
                         KRProgressHUD.dismiss()
                     } else {
+                        
                         do {
-                            let result = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                            let result = try NSJSONSerialization.JSONObjectWithData(response.data, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                             
                             let token = result["token"] as? String
                             if token?.characters.count == 0 {
                                 
-                                Alamofire.request(.DELETE, "https://api.github.com/authorizations/\(result["id"]!)", parameters: nil, encoding: .JSON, headers: ["Authorization": authorizationHeaderStr]).response(completionHandler: { (_, _, _, _) in
-                                    
+                                Provider.gitHouseProvider.request(GitHouseAPI.DeleteAuthorization(id: String(result["id"]!)), completion: { (result) in
                                     strongSelf.authorizate()
                                 })
                                 
                                 return
                             }
-                            
-                            KRProgressHUD.dismiss()
-                            
+                                                        
                             GitHouseUtils.accessToken = token
                             GitHouseUtils.authenticated = true
                             
@@ -211,6 +251,10 @@ class UserLoginViewController: UIViewController, UITextFieldDelegate {
                         }
                     }
                 })
+            case .Failure(_):
+                KRProgressHUD.showError()
+            }
+            
         }
     }
     

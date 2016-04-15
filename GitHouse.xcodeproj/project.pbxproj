@@ -26,7 +26,6 @@
 		FCBA109F1CA4EF22002E8DA8 /* NavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA109B1CA4EF22002E8DA8 /* NavigationStack.swift */; };
 		FCBA10A21CA4F4AC002E8DA8 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBA10A11CA4F4AC002E8DA8 /* UserLoginViewController.swift */; };
 		FCCC03F51CBE2B1A00EA21B0 /* GitHouseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC03F41CBE2B1A00EA21B0 /* GitHouseAPI.swift */; };
-		FCCC03F71CBE2BE800EA21B0 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC03F61CBE2BE800EA21B0 /* Authentication.swift */; };
 		FCD983511CAD288300969491 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD983501CAD288300969491 /* BaseNavigationController.swift */; };
 		FCD983531CAD296500969491 /* RepositoriesTableCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD983521CAD296500969491 /* RepositoriesTableCellTableViewCell.swift */; };
 		FCE17F751CA90ED900CD7E39 /* GitHouseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE17F741CA90ED900CD7E39 /* GitHouseUtils.swift */; };
@@ -73,7 +72,6 @@
 		FCBA109B1CA4EF22002E8DA8 /* NavigationStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationStack.swift; sourceTree = "<group>"; };
 		FCBA10A11CA4F4AC002E8DA8 /* UserLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginViewController.swift; sourceTree = "<group>"; };
 		FCCC03F41CBE2B1A00EA21B0 /* GitHouseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHouseAPI.swift; sourceTree = "<group>"; };
-		FCCC03F61CBE2BE800EA21B0 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		FCD983501CAD288300969491 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		FCD983521CAD296500969491 /* RepositoriesTableCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoriesTableCellTableViewCell.swift; sourceTree = "<group>"; };
 		FCE17F741CA90ED900CD7E39 /* GitHouseUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHouseUtils.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 				FCE17F741CA90ED900CD7E39 /* GitHouseUtils.swift */,
 				FCFE8BCA1CB64D5B0051D3D9 /* GitHouseStyle.swift */,
 				FCCC03F41CBE2B1A00EA21B0 /* GitHouseAPI.swift */,
-				FCCC03F61CBE2BE800EA21B0 /* Authentication.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -454,7 +451,6 @@
 				FCBA109F1CA4EF22002E8DA8 /* NavigationStack.swift in Sources */,
 				FCE17F791CA9175400CD7E39 /* ProfileViewController.swift in Sources */,
 				FCCC03F51CBE2B1A00EA21B0 /* GitHouseAPI.swift in Sources */,
-				FCCC03F71CBE2BE800EA21B0 /* Authentication.swift in Sources */,
 				FCBA109C1CA4EF22002E8DA8 /* CollectionStackViewController.swift in Sources */,
 				FC3CB42C1CB78CC900CA7D60 /* KRProgressHUDIconType.swift in Sources */,
 				FCF703521CAE63F500CE1565 /* UIImage+Octicons.swift in Sources */,
